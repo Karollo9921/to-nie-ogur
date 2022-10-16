@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@mur-zynski/auth": ["libs/auth/src/index.ts"]
+      "@mur-zynski/auth": ["libs/auth/src/index.ts"],
+      "@mur-zynski/db-repository": ["libs/db-repository/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
