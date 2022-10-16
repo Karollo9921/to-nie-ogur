@@ -9,8 +9,8 @@ import {
 import { AbstractDocument } from './abstract-entity/abstract-entity';
 
 @Injectable()
-export abstract class DbRepositoryService<T extends AbstractDocument> {
-  protected abstract readonly logger: Logger;
+export class DbRepositoryService<T extends AbstractDocument> {
+  protected readonly logger: Logger;
 
   constructor(
     protected readonly model: Model<T>,
