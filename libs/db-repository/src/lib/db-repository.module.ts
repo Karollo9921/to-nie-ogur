@@ -1,10 +1,17 @@
-import { Module, Global } from '@nestjs/common';
-import { DbRepositoryService } from './db-repository.service';
+import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
-@Global()
 @Module({
-  controllers: [],
-  providers: [DbRepositoryService],
-  exports: [DbRepositoryService],
+  imports: [
+    MongooseModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGODB_URI'),
+      }),
+      inject: [ConfigService],
+    }),
+  ],
+  providers: [],
+  exports: [],
 })
 export class DbRepositoryModule {}
