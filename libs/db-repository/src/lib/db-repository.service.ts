@@ -5,6 +5,8 @@ import {
   Model,
   FilterQuery,
   SaveOptions,
+  ProjectionType,
+  SortOrder,
 } from 'mongoose';
 import { AbstractDocument } from './abstract-entity/abstract-entity';
 
@@ -17,8 +19,23 @@ export class DbRepositoryService<T extends AbstractDocument> {
     private readonly connection: Connection
   ) {}
 
-  async findOne(filterQuery: FilterQuery<T>): Promise<T> {
-    return this.model.findOne(filterQuery);
+  async findOne(filterQuery: FilterQuery<T>, projections?: ProjectionType<T>): Promise<T> {
+    return this.model.findOne(filterQuery, projections);
+  }
+
+  async findOneWithSort(
+    filterQuery: FilterQuery<T>, 
+    projections?: ProjectionType<T>,
+    arg?: string | {
+      [key: string]: SortOrder | {
+          $meta: "textScore"
+      }
+    }
+  ): Promise<T> {
+    return this.model
+      .findOne(filterQuery, projections)
+      .sort(arg)
+      .limit(1);
   }
 
   async create(

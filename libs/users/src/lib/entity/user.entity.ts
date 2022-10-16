@@ -19,7 +19,7 @@ export class User extends AbstractDocument {
   numOfGames?: number;
 
   @Prop({ unique: true, index: true })
-  id: number;
+  id?: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
