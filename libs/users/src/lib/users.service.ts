@@ -17,13 +17,13 @@ export class UsersService {
     createUser: Omit<User, '_id' | 'rating' | 'numOfGames' | 'id'>
   ): Promise<User | UnprocessableEntityException> {
     this.validateCreateUserRequest(createUser);
-    const maxId = await this.usersRepository
+    const userWithMaxId = await this.usersRepository
       .findOneWithSort({ login: createUser.login }, { }, { id: -1 })
 
     return this.usersRepository.create({
       ...createUser,
       password: await bcrypt.hash(createUser.password, 10),
-      id: maxId?.id ? maxId.id + 1 : 1
+      id: userWithMaxId?.id ? userWithMaxId.id + 1 : 1
     });
   }
 

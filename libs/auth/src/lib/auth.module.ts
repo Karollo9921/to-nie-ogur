@@ -1,4 +1,4 @@
-import { UsersModule } from '@mur-zynski/users';
+import { UsersModule } from '@libs/users';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
