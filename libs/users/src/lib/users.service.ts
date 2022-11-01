@@ -41,10 +41,9 @@ export class UsersService {
   private async validateCreateUserRequest(
     createUser: Partial<User>
   ): Promise<void | UnprocessableEntityException> {
-    let user: User;
-
-    user = await this.getUser(createUser.login);
-    if (!user) user = await this.getUser(createUser.email);
+    const user = await this.getUser(createUser.login)
+      ? await this.getUser(createUser.login)
+      : await this.getUser(createUser.email);
 
     if (user) { 
       throw new UnprocessableEntityException('Login or Email already exists.');
