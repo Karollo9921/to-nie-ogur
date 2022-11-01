@@ -7,6 +7,7 @@ export class CreateUserDto extends User {
   login: string;
 
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 
   @IsString()
