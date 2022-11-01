@@ -1,7 +1,6 @@
-import { User } from '@libs/users';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateUserDto extends User {
+export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   login: string;

@@ -18,7 +18,7 @@ export class UsersService {
     await this.validateCreateUserRequest(createUser);
 
     const userWithMaxId = await this.usersRepository
-      .findOneWithSort({ login: createUser.login }, { }, { id: -1 })
+      .findOneWithSort({ }, { }, { id: -1 })
 
     return this.usersRepository.create({
       ...createUser,
