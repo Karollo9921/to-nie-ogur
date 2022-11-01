@@ -22,7 +22,7 @@ import { ConfigModule } from '@nestjs/config';
   ],
   providers: [
     UsersService, 
-    UsersRepository
+    UsersRepository,
   ],
   exports: [UsersService]
 })

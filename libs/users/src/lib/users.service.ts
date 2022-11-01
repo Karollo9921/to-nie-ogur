@@ -16,7 +16,8 @@ export class UsersService {
   async createUser(
     createUser: Omit<User, '_id' | 'rating' | 'numOfGames' | 'id'>
   ): Promise<User | UnprocessableEntityException> {
-    this.validateCreateUserRequest(createUser);
+    await this.validateCreateUserRequest(createUser);
+
     const userWithMaxId = await this.usersRepository
       .findOneWithSort({ login: createUser.login }, { }, { id: -1 })
 
