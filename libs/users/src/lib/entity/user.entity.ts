@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AbstractDocument } from 'libs/db-repository/src/lib/abstract-entity/abstract-entity';
 
-@Schema()
+@Schema({ timestamps: { createdAt: true, updatedAt: true } })
 export class User extends AbstractDocument {
   @Prop()
   login: string;

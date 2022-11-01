@@ -1,4 +1,4 @@
-import { UsersModule } from '@libs/users';
+import { LibUsersModule } from '@libs/users';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -7,7 +7,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
-    UsersModule,
+    LibUsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '../../../../.env'
