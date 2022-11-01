@@ -28,13 +28,12 @@ export class UsersService {
   }
 
   async getUser(
-    login?: string, 
-    email?: string
+    identifier: string, 
   ): Promise<User> {
     return this.usersRepository.findOne({
       $or: [
-        { login },
-        { email },
+        { login: identifier },
+        { email: identifier },
       ]
     });
   }
@@ -42,7 +41,10 @@ export class UsersService {
   private async validateCreateUserRequest(
     createUser: Partial<User>
   ): Promise<void | UnprocessableEntityException> {
-    const user = await this.getUser(createUser.login, createUser.email);
+    let user: User;
+
+    user = await this.getUser(createUser.login);
+    if (!user) user = await this.getUser(createUser.email);
 
     if (user) { 
       throw new UnprocessableEntityException('Login or Email already exists.');

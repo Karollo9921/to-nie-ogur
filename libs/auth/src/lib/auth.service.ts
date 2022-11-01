@@ -18,20 +18,11 @@ export class AuthService {
   async login(
     credentials: ILoginCredentials
   ): Promise<{ access_token: string, expiresIn: Date }> {
-    let email: string;
-    let login: string;
-
-    if (credentials.identifier.split('@').length === 2) {
-      email = credentials.identifier
-    } else {
-      login = credentials.identifier
-    }
-
     const jwtPayload: IJWTPayload = {
       identifier: credentials.identifier,
     } 
 
-    const user = await this.usersService.getUser(login, email);
+    const user = await this.usersService.getUser(credentials.identifier);
     if (!user) throw new UnauthorizedException('Credentials are not valid');
 
     const passwordIsValid = await bcrypt.compare(credentials.password, user.password);
